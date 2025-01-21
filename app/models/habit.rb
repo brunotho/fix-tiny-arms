@@ -24,6 +24,7 @@ class Habit < ApplicationRecord
   end
 
   scope :due_today, -> { where("? = ANY(days_of_week)", Time.current.wday) }
+  scope :ordered_by_time, -> { order(:time_of_day) }
 
   private
 
