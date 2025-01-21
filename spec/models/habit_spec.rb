@@ -72,6 +72,16 @@ RSpec.describe Habit, type: :model do
         expect(Habit.due_today).not_to include(undue_habit)
       end
     end
+
+    describe ".orderd_by_time" do
+      it "orders habits by time_of_day" do
+        mid = create(:habit, time_of_day: "12:00")
+        late = create(:habit, time_of_day: "15:00")
+        early = create(:habit, time_of_day: "04:00")
+
+        expect(Habit.ordered_by_time).to eq([early, mid, late])
+      end
+    end
   end
 
 end
