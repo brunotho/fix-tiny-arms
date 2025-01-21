@@ -61,4 +61,17 @@ RSpec.describe Habit, type: :model do
 
   end
 
+  describe "scopes" do
+    describe ".due_today" do
+      it "returns habits scheduled for today" do
+        today = Date.current.wday
+        due_habit = create(:habit, days_of_week: [today])
+        undue_habit = create(:habit, days_of_week: [(today + 1) % 7])
+
+        expect(Habit.due_today).to include(due_habit)
+        expect(Habit.due_today).not_to include(undue_habit)
+      end
+    end
+  end
+
 end

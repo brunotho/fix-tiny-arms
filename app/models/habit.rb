@@ -23,6 +23,7 @@ class Habit < ApplicationRecord
     habit_completions.create!(completed_on: Date.today)
   end
 
+  scope :due_today, -> { where("? = ANY(days_of_week)", Time.current.wday) }
 
   private
 
