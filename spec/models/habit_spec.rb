@@ -73,13 +73,34 @@ RSpec.describe Habit, type: :model do
       end
     end
 
-    describe ".orderd_by_time" do
+    describe ".ordered_by_time" do
       it "orders habits by time_of_day" do
         mid = create(:habit, time_of_day: "12:00")
         late = create(:habit, time_of_day: "15:00")
         early = create(:habit, time_of_day: "04:00")
 
         expect(Habit.ordered_by_time).to eq([early, mid, late])
+      end
+    end
+
+    describe "habits for daily view" do
+      it "returns today's habits in time order with completion status" do
+        today = Date.current.wday
+        tomorrow = (Date.current.wday + 1) % 7
+
+        early_today = create(:habit, days_of_week: [today], time_of_day: "04:00")
+        mid_today = create(:habit, days_of_week: [today], time_of_day: "11:00")
+        late_today = create(:habit, days_of_week: [today], time_of_day: "15:00")
+        tomorrow_habit = create(:habit, days_of_week: [tomorrow])
+
+        mid_today.mark_completed!
+
+        habits = Habit.due_today.ordered_by_time
+
+        expect(habits).to eq([early_today, mid_today, late_today])
+
+        expect(early_today.completed_today?).to be false
+        expect(mid_today.completed_today?).to be true
       end
     end
   end
