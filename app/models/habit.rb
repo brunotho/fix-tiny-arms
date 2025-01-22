@@ -4,6 +4,8 @@ class Habit < ApplicationRecord
 
   validates :name,
             presence: true
+  validates :time_of_day,
+            presence: true
   validates :days_of_week,
             presence: true
 

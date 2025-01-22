@@ -2,5 +2,7 @@
 <div>
   <% @habits.each do |habit| %>
     <div><%= habit.name %></div>
+    <div><%= habit.time_of_day %></div>
+    <div><%= habit.days_of_week %></div>
   <% end %>
 </div>

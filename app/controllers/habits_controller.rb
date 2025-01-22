@@ -4,9 +4,17 @@ class HabitsController < ApplicationController
   end
 
   def create
+    puts "TIME VALUE: #{params.dig(:habit, :time_of_day)}"
+    p "😍"
+    puts "PARAMS: #{params.inspect}"  # what's coming in?
     @habit = current_user.habits.build(habit_params)
+    puts "VALID? #{@habit.valid?}"    # is it valid?
+    puts "ERRORS: #{@habit.errors.full_messages}" if !@habit.valid?
+
     if @habit.save
-      redirect_to habits_path
+      puts "SAVED!"
+
+      redirect_to habits_path, notice: "Habit created 👺"
     else
       render :new, status: 422
     end
