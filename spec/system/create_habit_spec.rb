@@ -1,21 +1,4 @@
-# RSpec.describe "Creating a habit", type: :system do
-#   it "creates habit with form inputs" do
-#     user = create(:user)
-#     sign_in user
 
-#     visit new_habit_path
-
-#     fill_in "Name", with: "Juggle Diaries"
-#     find("#habit_time_of_day").set("05:00")
-#     check "Monday"
-#     check "Wednesday"
-#     check "Friday"
-#     click_button "Create Habit"
-
-#     expect(page).to have_content("Juggle Diaries")
-#   end
-
-# end
 RSpec.describe "Creating a habit", type: :system do
   it "creates habit with form inputs" do
     user = create(:user)

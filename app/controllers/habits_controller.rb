@@ -4,12 +4,7 @@ class HabitsController < ApplicationController
   end
 
   def create
-    puts "TIME VALUE: #{params.dig(:habit, :time_of_day)}"
-    p "😍"
-    puts "PARAMS: #{params.inspect}"  # what's coming in?
     @habit = current_user.habits.build(habit_params)
-    puts "VALID? #{@habit.valid?}"    # is it valid?
-    puts "ERRORS: #{@habit.errors.full_messages}" if !@habit.valid?
 
     if @habit.save
       puts "SAVED!"
@@ -22,6 +17,15 @@ class HabitsController < ApplicationController
 
   def index
     @habits = current_user.habits
+  end
+
+  def toggle_completed
+    @habit = current_user.habits.find(params[:id])
+    @habit.completed_today? ? @habit.uncomplete! : @habit.mark_completed!
+
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.replace(@habit) }
+    end
   end
 
   private

@@ -17,4 +17,8 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   resources :habits, only: [:new, :create, :index]
+
+  resources :habits do
+    post :toggle_completed, on: :member
+  end
 end

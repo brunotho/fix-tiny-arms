@@ -1,8 +1,6 @@
-<h1>Habits#index</h1>
-<div>
-  <% @habits.each do |habit| %>
-    <div><%= habit.name %></div>
-    <div><%= habit.time_of_day %></div>
-    <div><%= habit.days_of_week %></div>
+<h3>to do today:</h1>
+<div class="habits-list">
+  <% @habits.due_today.ordered_by_time.each do |habit| %>
+    <%= render habit %>
   <% end %>
 </div>

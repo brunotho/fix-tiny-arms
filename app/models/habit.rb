@@ -25,6 +25,10 @@ class Habit < ApplicationRecord
     habit_completions.create!(completed_on: Date.today)
   end
 
+  def uncomplete!
+    habit_completions.where(completed_on: Date.current).destroy_all
+  end
+
   scope :due_today, -> { where("? = ANY(days_of_week)", Time.current.wday) }
   scope :ordered_by_time, -> { order(:time_of_day) }
 
