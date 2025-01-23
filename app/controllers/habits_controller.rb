@@ -1,4 +1,8 @@
 class HabitsController < ApplicationController
+  def index
+    @habits = current_user.habits
+  end
+
   def new
     @habit = Habit.new
   end
@@ -15,8 +19,26 @@ class HabitsController < ApplicationController
     end
   end
 
-  def index
-    @habits = current_user.habits
+  def edit
+    @habit = current_user.habits.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to habits_path, alert: "Not authorized"
+  end
+
+  def update
+    @habit = current_user.habits.find(params[:id])
+
+    if @habit.update(habit_params)
+      redirect_to habits_path, notice: "Habit updated 💪"
+    else
+      render :edit, status: 422
+    end
+  end
+
+  def destroy
+    @habit = current_user.habits.find(params[:id])
+    @habit.destroy
+    redirect_to habits_path, notice: "Habit deleted 💀"
   end
 
   def toggle_completed

@@ -16,9 +16,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  resources :habits, only: [:new, :create, :index]
-
   resources :habits do
     post :toggle_completed, on: :member
   end
+
+  root "pages#today"
 end

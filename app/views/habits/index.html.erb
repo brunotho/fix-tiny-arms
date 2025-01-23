@@ -1,6 +1,6 @@
-<h3>to do today:</h1>
+<h3>all my good habits 🤗</h1>
 <div class="habits-list">
-  <% @habits.due_today.ordered_by_time.each do |habit| %>
+  <% @habits.ordered_by_time.each do |habit| %>
     <%= render habit %>
   <% end %>
 </div>

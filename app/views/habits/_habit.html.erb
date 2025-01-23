@@ -4,7 +4,10 @@
       <%= f.check_box :completed,
             checked: habit.completed_today?,
             data: { controller: "completion-toggle" } %>
-      <span class="habit-name"><%= habit.name %></span>
+      <span class="habit-name">
+        <%= habit.name %>
+        <%= link_to "(edit)", edit_habit_path(habit) %>
+      </span>
     <% end %>
   </div>
 <% end %>
