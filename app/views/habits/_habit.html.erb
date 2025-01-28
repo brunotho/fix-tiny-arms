@@ -1,0 +1,17 @@
+<%= turbo_frame_tag habit do %>
+  <div id="habit-<%= habit.id %>">
+    <%= form_with(url: toggle_completed_habit_path(habit), class: "inline") do |f| %>
+      <%= f.check_box :completed,
+            checked: habit.completed_today?,
+            data: { controller: "completion-toggle" } %>
+      <span class="habit-item">
+        <span class="habit-name">
+          <%= habit.name %>
+        </span>
+        <span class="habit-controls">
+          <%= link_to "(edit)", edit_habit_path(habit), data: { turbo_frame: "_top" } %>
+        </span>
+      </span>
+    <% end %>
+  </div>
+<% end %>

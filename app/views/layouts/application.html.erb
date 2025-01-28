@@ -18,6 +18,18 @@
   </head>
 
   <body>
+    <header class="bg-gray-100 p-4">
+      <%= link_to "Today's Habits", root_path, class: "mr-4" %>
+      <%= link_to "All Habits", habits_path, class: "mr-4" %>
+      <%= link_to "New Habit", new_habit_path %>
+    </header>
+
+    <% if notice %>
+      <p class="notice"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert"><%= alert %></p>
+    <% end %>
     <%= yield %>
   </body>
 </html>

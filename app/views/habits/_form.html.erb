@@ -1,0 +1,22 @@
+<%= simple_form_for habit do |f| %>
+  <%= f.input :name, label: "Name" %>
+  <%= f.input :time_of_day,
+              as: :time,
+              minute_step: 15,
+              label: "Time",
+              required: true
+  %>
+
+  <div class="days-group">
+    <% Date::DAYNAMES.each_with_index do |day, i| %>
+      <%= check_box_tag "habit[days_of_week][]",
+          i,
+          habit.days_of_week&.include?(i),
+          id: day.downcase
+      %>
+      <%= label_tag day.downcase, day %>
+    <% end %>
+  </div>
+
+  <%= f.button :submit %>
+<% end %>

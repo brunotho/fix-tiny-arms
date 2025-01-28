@@ -1,0 +1,6 @@
+<h1>all my good habits 🤗</h1>
+<div class="habits-list">
+  <% @habits.ordered_by_time.each do |habit| %>
+    <%= render habit %>
+  <% end %>
+</div>

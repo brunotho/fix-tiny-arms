@@ -4,6 +4,8 @@ class Habit < ApplicationRecord
 
   validates :name,
             presence: true
+  validates :time_of_day,
+            presence: true
   validates :days_of_week,
             presence: true
 
@@ -12,18 +14,22 @@ class Habit < ApplicationRecord
   validate :days_must_be_unique
 
   def due_today?
-    days_of_week.include?(Time.now.wday)
+    days_of_week.include?(Date.current.wday)
   end
 
   def completed_today?
-    habit_completions.where(completed_on: Date.today).exists?
+    habit_completions.where(completed_on: Date.current).exists?
   end
 
   def mark_completed!
-    habit_completions.create!(completed_on: Date.today)
+    habit_completions.create!(completed_on: Date.current)
   end
 
-  scope :due_today, -> { where("? = ANY(days_of_week)", Time.current.wday) }
+  def uncomplete!
+    habit_completions.where(completed_on: Date.current).destroy_all
+  end
+
+  scope :due_today, -> { where("? = ANY(days_of_week)", Date.current.wday) }
   scope :ordered_by_time, -> { order(:time_of_day) }
 
   private
