@@ -11,8 +11,6 @@ class HabitsController < ApplicationController
     @habit = current_user.habits.build(habit_params)
 
     if @habit.save
-      puts "SAVED!"
-
       redirect_to habits_path, notice: "Habit created 👺"
     else
       render :new, status: 422

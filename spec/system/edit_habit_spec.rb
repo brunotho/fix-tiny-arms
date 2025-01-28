@@ -25,7 +25,7 @@ RSpec.describe "Editing habits", type: :system do
     habit.reload
     expect(habit.name).to eq "New Name"
     expect(habit.time_of_day.strftime("%H:%M")).to eq "09:15"
-    expect(habit.days_of_week).to match_array[2, 3]
+    expect(habit.days_of_week).to match_array([2, 3])
   end
 
   it "prevents editing habits that aren't owned" do
