@@ -18,10 +18,12 @@
   </head>
 
   <body>
-    <header class="bg-gray-100 p-4">
-      <%= link_to "Today's Habits", root_path, class: "mr-4" %>
-      <%= link_to "All Habits", habits_path, class: "mr-4" %>
-      <%= link_to "New Habit", new_habit_path %>
+    <header>
+      <% if user_signed_in? %>
+        <%= link_to "Today's Habits", root_path %>
+        <%= link_to "All Habits", habits_path %>
+        <%= link_to "New Habit", new_habit_path %>
+      <% end %>
     </header>
 
     <% if notice %>
