@@ -2,10 +2,15 @@ class Habit < ApplicationRecord
   belongs_to :user
   has_many :habit_completions
 
+  YOUTUBE_URL_REGEX = /\A((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?\z/
+
   validates :name,
             presence: true
   validates :time_of_day,
             presence: true
+  validates :youtube_url,
+            format: { with: YOUTUBE_URL_REGEX, message: "must be a valid YouTube URL"},
+            allow_blank: true
   validates :days_of_week,
             presence: true
 
