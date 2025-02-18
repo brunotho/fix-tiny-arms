@@ -1,0 +1,19 @@
+<div>
+  <h1><%= @habit.name %></h1>
+
+  <% if @habit.youtube_url? %>
+    <iframe
+      width="560"
+      height="315"
+      src="https://www.youtube.com/embed/<%= extract_youtube_id(@habit.youtube_url) %>"
+      frameborder="0"
+      allowfullscreen
+    >
+    </iframe>
+  <% end %>
+
+  <%= button_to "Done",
+      mark_completed_habit_path(@habit),
+      method: :post,
+      class: "btn" %>
+</div>

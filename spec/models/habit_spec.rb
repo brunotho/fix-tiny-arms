@@ -20,6 +20,32 @@ RSpec.describe Habit, type: :model do
         expect(habit).not_to be_valid
       end
     end
+
+    describe "youtube_url" do
+      it "accepts valid YouTube URLs" do
+        valid_urls = [
+          "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "https://youtube.com/watch?v=dQw4w9WgXcQ",
+          "https://youtu.be/dQw4w9WgXcQ"
+        ]
+
+        valid_urls.each do |url|
+          habit = build(:habit, youtube_url: url)
+          expect(habit).to be_valid
+        end
+      end
+
+      it "rejects non-YouTube URLs" do
+        habit = build(:habit, youtube_url: "https://vimeo.com/groups/826428/videos/676247342")
+        expect(habit).not_to be_valid
+        expect(habit.errors[:youtube_url]).to include("must be a valid YouTube URL")
+      end
+
+      it "allows blank YouTube URL" do
+        expect(build(:habit, youtube_url: "")).to be_valid
+        expect(build(:habit, youtube_url: nil)).to be_valid
+      end
+    end
   end
 
   describe "associations" do
@@ -104,5 +130,4 @@ RSpec.describe Habit, type: :model do
       end
     end
   end
-
 end
