@@ -9,7 +9,7 @@ class Habit < ApplicationRecord
   validates :time_of_day,
             presence: true
   validates :youtube_url,
-            format: { with: YOUTUBE_URL_REGEX, message: "must be a valid YouTube URL"},
+            format: { with: YOUTUBE_URL_REGEX, message: "must be a valid YouTube URL" },
             allow_blank: true
   validates :days_of_week,
             presence: true

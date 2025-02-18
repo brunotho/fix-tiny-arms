@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
   resources :habits do
     post :toggle_completed, on: :member
+    member do
+      post :mark_completed
+    end
   end
 
   root "pages#today"

@@ -3,6 +3,10 @@ class HabitsController < ApplicationController
     @habits = current_user.habits
   end
 
+  def show
+    @habit = current_user.habits.find(params[:id])
+  end
+
   def new
     @habit = Habit.new
   end
@@ -37,6 +41,12 @@ class HabitsController < ApplicationController
     @habit = current_user.habits.find(params[:id])
     @habit.destroy
     redirect_to habits_path, notice: "Habit deleted 💀"
+  end
+
+  def mark_completed
+    @habit = current_user.habits.find(params[:id])
+    @habit.mark_completed! unless @habit.completed_today?
+    redirect_to root_path, notice: "Get it! 💪"
   end
 
   def toggle_completed
