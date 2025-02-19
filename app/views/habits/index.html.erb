@@ -1,6 +1,7 @@
-<h1>all my good habits 🤗</h1>
+<h1>all my good habits</h1>
 <div class="habits-list">
-  <% @habits.ordered_by_time.each do |habit| %>
-    <%= render habit %>
-  <% end %>
+  <%= render partial: "habits/habit_for_index",
+            collection: @habits,
+            as: :habit
+  %>
 </div>
