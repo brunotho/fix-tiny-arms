@@ -1,4 +1,7 @@
 <h1>to do today</h1>
 <div class="habits-list">
-  <%= render @habits %>
+  <%= render partial: "habits/habit_for_today",
+            collection: @habits,
+            as: :habit
+  %>
 </div>

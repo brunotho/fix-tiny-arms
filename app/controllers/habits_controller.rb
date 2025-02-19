@@ -54,7 +54,13 @@ class HabitsController < ApplicationController
     @habit.completed_today? ? @habit.uncomplete! : @habit.mark_completed!
 
     respond_to do |format|
-      format.turbo_stream { render turbo_stream: turbo_stream.replace(@habit) }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(
+          @habit,
+          partial: "habits/habit_for_today",
+          locals: { habit: @habit }
+        )
+      }
     end
   end
 
