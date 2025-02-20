@@ -1,6 +1,6 @@
 class Habit < ApplicationRecord
   belongs_to :user
-  has_many :habit_completions
+  has_many :habit_completions, dependent: :destroy
 
   YOUTUBE_URL_REGEX = /\A((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?\z/
 

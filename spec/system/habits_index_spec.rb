@@ -1,4 +1,4 @@
-RSpec.describe "Habits Inde", type: :system do
+RSpec.describe "Habits Index", type: :system do
   let(:user) { create(:user) }
 
   before do

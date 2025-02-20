@@ -1,10 +1,19 @@
-  <div id="habit-<%= habit.id %>">
-      <span class="habit-item">
-        <span class="habit-name">
-          <%= habit.name %>
-        </span>
-        <span class="habit-controls">
-          <%= link_to "(edit)", edit_habit_path(habit), data: { turbo_frame: "_top" } %>
-        </span>
-      </span>
-  </div>
+<div id="habit-<%= habit.id %>">
+  <span class="habit-item">
+    <span class="habit-name">
+      <%= habit.name %>
+    </span>
+    <span class="habit-controls">
+      <%= link_to "(edit)", edit_habit_path(habit), data: { turbo_frame: "_top" } %>
+      <%= button_to "(delete)",
+            habit_path(habit),
+            method: :delete,
+            data: {
+              turbo_frame: "_top",
+              turbo_confirm: "Are you sure?"
+            },
+            class: "inline"
+      %>
+    </span>
+  </span>
+</div>
