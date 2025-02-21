@@ -7,6 +7,7 @@ RSpec.describe "Creating a habit", type: :system do
     visit new_habit_path
 
     fill_in "habit_name", with: "Juggle Diaries"
+    fill_in "habit_youtube_url", with: "https://www.youtube.com/watch?v=hqiDnMvgQas&ab_channel=DiLorenzoFamily"
     select "05", from: "habit_time_of_day_4i"
     select "00", from: "habit_time_of_day_5i"
     check "Monday"
