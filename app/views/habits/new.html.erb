@@ -1,29 +1,4 @@
 <div>
   <h1>New Habit</h1>
-
-  <%= simple_form_for @habit do |f| %>
-    <%= f.input :name %>
-    <%= f.input :time_of_day,
-                as: :time,
-                minute_step: 15,
-                label: "Time",
-                required: true
-    %>
-
-    <fieldset class="days-group">
-      <legend>Days</legend>
-      <% Date::DAYNAMES.each_with_index do |day, i| %>
-        <div class="day-checkbox">
-          <%= check_box_tag "habit[days_of_week][]",
-              i,
-              @habit.days_of_week&.include?(i),
-              id: "habit_days_of_week#{i}"
-          %>
-          <%= label_tag "habit_days_of_week#{i}", day %>
-        </div>
-      <% end %>
-    </fieldset>
-
-    <%= f.button :submit, "Create Habit" %>
-  <% end %>
+  <%= render "form", habit: @habit %>
 </div>
