@@ -1,11 +1,11 @@
 <div>
   <h1><%= @habit.name %></h1>
 
-  <% if @habit.youtube_url? %>
+  <% if @habit.youtube_url.present? %>
     <iframe
       width="560"
       height="315"
-      src="https://www.youtube.com/embed/<%= extract_youtube_id(@habit.youtube_url) %>"
+      src="<%= @habit.youtube_embed_url %>"
       frameborder="0"
       allowfullscreen
     >

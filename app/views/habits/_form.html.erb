@@ -13,7 +13,7 @@
       <%= check_box_tag "habit[days_of_week][]",
           i,
           habit.days_of_week&.include?(i),
-          id: "habit_days_of_week_#{i}"
+          id: day.downcase
       %>
       <%= label_tag day.downcase, day %>
     <% end %>

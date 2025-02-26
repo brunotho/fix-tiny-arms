@@ -67,6 +67,6 @@ class HabitsController < ApplicationController
   private
 
   def habit_params
-    params.require(:habit).permit(:name, :time_of_day, days_of_week: [])
+    params.require(:habit).permit(:name, :time_of_day, :youtube_url, days_of_week: [])
   end
 end
