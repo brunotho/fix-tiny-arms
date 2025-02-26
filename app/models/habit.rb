@@ -3,6 +3,7 @@ class Habit < ApplicationRecord
   has_many :habit_completions, dependent: :destroy
 
   YOUTUBE_URL_REGEX = /\A((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)(\S+)?\z/
+  YOUTUBE_ID_REGEX = /(?:youtube\.com\/watch\?v=|youtu.be\/)([a-zA-Z0-9_-]{11})/
 
   validates :name,
             presence: true
@@ -32,6 +33,13 @@ class Habit < ApplicationRecord
 
   def uncomplete!
     habit_completions.where(completed_on: Date.current).destroy_all
+  end
+
+  def youtube_embed_url
+    match = youtube_url&.match(YOUTUBE_ID_REGEX)
+    return nil unless match
+
+    "https://www.youtube.com/embed/#{match[1]}?mute=1"
   end
 
   scope :due_today, -> { where("? = ANY(days_of_week)", Date.current.wday) }
