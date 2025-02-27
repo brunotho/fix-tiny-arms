@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_01_21_143717) do
+ActiveRecord::Schema[7.2].define(version: 2025_02_27_162702) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "beep_timestamps", force: :cascade do |t|
+    t.bigint "habit_id", null: false
+    t.string "video_id"
+    t.json "timestamps"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["habit_id"], name: "index_beep_timestamps_on_habit_id"
+  end
 
   create_table "habit_completions", force: :cascade do |t|
     t.bigint "habit_id", null: false
@@ -47,6 +57,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_01_21_143717) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "beep_timestamps", "habits"
   add_foreign_key "habit_completions", "habits"
   add_foreign_key "habits", "users"
 end
